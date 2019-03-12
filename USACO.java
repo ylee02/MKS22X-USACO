@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 public class USACO {
+	
+	int[] moves = {1, 0, 0, 1, -1, 0, 0, -1};
 	public static int bronze(String filename) {
 		File fil = new File(filename);
 		Scanner in = new Scanner(fil);
@@ -74,6 +76,42 @@ public class USACO {
 		count = in.nextLine().split(" ");
 		data[Integer.parseInt(count[0]) - 1][Integer.parseInt(count[1]) - 1] = 1;
 		silverH(t, data);
+		return data[Integer.parseInt(count[2]) - 1][Integer.parseInt(coords[3]) - 1];
+	}
+	
+	public static boolean isInBounds(int r, int c, int[][]data) {
+		try {
+			data[r][c];
+			return true;
+		} catch(IndexOutOfBoundsException e) {
+			return false;
+		}
+	}
+	
+	public static void silverH(int t, int[][]data) {
+		int[][] n = int[data.length][data[0].length];
+		for (int i = 0; i < t; i++) {
+			for (int y = 0; y < data.length; y++) {
+				for (int x = 0; x < data[0].length; x++) {
+					if (data[y][x] == -1) {
+						n[y][x] == -1;
+					} else {
+						int ans = 0;
+						for (int j = 0; j < 8; j++) {
+							if (isInBounds( y + moves[j], x + moves[j + 1], data) {
+								if (data[y][x] != -1) {
+									ans += data[y][x];
+								}
+							}
+						}
+						n[y][x] = ans;
+					}
+				}
+			}
+		}
+		return n;
+	}
+					
 	}
 			
 }
