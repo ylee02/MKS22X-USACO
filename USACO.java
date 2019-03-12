@@ -56,3 +56,24 @@ public class USACO {
 		}
 		return ans;
 	}
+	
+	public static int silver(String filename) {
+		File fil = new File(filename);
+		Scanner in = new Scanner(fil);
+		String[] count = in.nextLine().split(" ");
+		int[][] data = new int[Integer.parseInt(count[0])][Integer.parseInt(count[1])];
+		int t = Integer.parseInt(count[2]);
+		for(int i = 0; i < data.length; i++) {
+			String temp = in.nextLine();
+			for (int y = 0; y < data[0].length; y++) {
+				if (temp.charAt(y) == '*') {
+					data[i][y] = -1;
+				}
+			}
+		}
+		count = in.nextLine().split(" ");
+		data[Integer.parseInt(count[0]) - 1][Integer.parseInt(count[1]) - 1] = 1;
+		silverH(t, data);
+	}
+			
+}
