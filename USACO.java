@@ -83,11 +83,12 @@ public class USACO {
 			}
 			count = in.nextLine().split(" ");
 			data[Integer.parseInt(count[0]) - 1][Integer.parseInt(count[1]) - 1] = 1;
-			silverH(t, data);
+			System.out.println(Arrays.deepToString(data));
+			data =silverH(t, data);
+
 			System.out.println(data[Integer.parseInt(count[2]) - 1][Integer.parseInt(count[3]) - 1] + "  ");
 			return data[Integer.parseInt(count[2]) - 1][Integer.parseInt(count[3]) - 1];
 		}catch(FileNotFoundException e) {
-
 			System.exit(1);
 			return -1;
 		}
@@ -108,15 +109,17 @@ public class USACO {
 		for (int i = 0; i < t; i++) {
 			for (int y = 0; y < data.length; y++) {
 				for (int x = 0; x < data[0].length; x++) {
-					System.out.println(Arrays.deepToString(data));
-					if (data[y][x] == -1) {
-						n[y][x] = -1;
+					System.out.println(Arrays.deepToString(n));
+					if (data[y][x] == -1 || data[y][x] == 1) {
+						n[y][x] = data[y][x];
 					} else {
+
 						int ans = 0;
-						for (int j = 0; j < 7; j++) {
+						for (int j = 0; j < 7; j+=2) {
 							if (isInBounds( y + moves[j], x + moves[j + 1], data)) {
-								if (data[y][x] != -1) {
-									ans += data[y][x];
+								System.out.println("ok");
+								if (data[y][x] != -1 && data[y+moves[j]][x+moves[j+1]] != -1) {
+									ans += data[y+ moves[j]][x+ moves[j + 1]];
 								}
 							}
 						}
